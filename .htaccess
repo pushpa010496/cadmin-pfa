@@ -1,0 +1,422 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+     #rewrite .php to slug
+    RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]
+    RewriteRule ^ /%1 [NC,L,R]
+
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^ %{REQUEST_URI}.php [NC,L]
+    #end rewrite .php to slug
+    
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+AddHandler application/x-mpegURL .m3u8
+AddHandler x-msvideo .avi
+AddHandler x-ms-wmv .wmv
+AddType application/x-apple-diskimage dmg
+AddType application/yin+xml yin
+
+AddType video/3gpp2 3g2
+AddType video/h261 h261
+AddType video/h263 h263
+AddType video/h264 h264
+AddType video/jpeg jpgv
+AddType video/jpm jpgm jpm
+AddType video/mj2 mj2 mjp2
+AddType video/mp4 mp4 mp4v mpg4
+
+AddType video/ogg ogv
+AddType video/quicktime mov qt
+AddType video/vnd.dece.hd uvh uvvh
+AddType video/vnd.dece.mobile uvm uvvm
+AddType video/vnd.dece.pd uvp uvvp
+AddType video/vnd.dece.sd uvs uvvs
+AddType video/vnd.dece.video uvv uvvv
+AddType video/vnd.dvb.file dvb
+AddType video/vnd.fvt fvt
+AddType video/vnd.mpegurl m4u mxu
+AddType video/vnd.ms-playready.media.pyv pyv
+AddType video/vnd.uvvu.mp4 uvu uvvu
+AddType video/vnd.vivo viv
+AddType video/webm webm
+AddType video/x-f4v f4v
+AddType video/x-fli fli
+AddType video/x-flv flv
+AddType video/x-m4v m4v
+AddType video/x-matroska mk3d mks mkv
+AddType video/x-mng mng
+AddType video/x-ms-asf asf asx
+AddType video/x-ms-vob vob
+AddType video/x-ms-wm wm
+AddType video/x-ms-wmv wmv
+AddType video/x-ms-wmx wmx
+AddType video/x-ms-wvx wvx
+AddType video/x-msvideo avi
+AddType video/x-sgi-movie movie
+AddType video/x-smv smv
+AddType x-conference/x-cooltalk ice
+AddType application/vnd.apple.installer+xml mpkg
+AddType application/vnd.apple.mpegurl m3u8
+
+
+
+<Files "serviceworker.js">
+  Header Set Service-Worker-allowed "/"
+  AddType application/javascript .js 
+  AddType text/html .html .htm 
+  AddCharset utf-8 .js 
+</Files>
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php7_module>
+   php_flag display_errors Off
+   php_value max_execution_time 900
+   php_value max_input_time 500
+   php_value max_input_vars 10000
+   php_value memory_limit -1
+   php_value post_max_size 8048M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php56"
+   php_value upload_max_filesize 2048M
+   php_flag zlib.output_compression On
+</IfModule>
+<IfModule lsapi_module>
+   php_flag display_errors Off
+   php_value max_execution_time 900
+   php_value max_input_time 500
+   php_value max_input_vars 10000
+   php_value memory_limit -1
+   php_value post_max_size 8048M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php56"
+   php_value upload_max_filesize 8048M
+   php_flag zlib.output_compression On
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
+
+
+#BEGIN PERFORMANCE GZIP
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Images
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+
+  # CSS, JavaScript
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+
+  # Others
+  ExpiresByType application/pdf "access plus 1 month"
+  ExpiresByType application/x-shockwave-flash "access plus 1 month"
+</IfModule>
+#END PERFORMANCE GZIP
+
+
+# BEGIN Security
+#AIOWPS_BLOCK_IMPORTANT_FILE_ACCESS_START
+
+# secure htaccess file
+<Files .htaccess>
+ order allow,deny
+ deny from all
+</Files>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|font.css|css|js)$">
+    Header set Access-Control-Allow-Origin *    
+  </FilesMatch>
+</IfModule>
+
+<FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh|env)$">
+ Order Allow,Deny
+ Deny from all
+</FilesMatch>
+
+<FilesMatch "\.(htaccess|htpasswd|ini|phps|fla|psd|log|sh)$">
+ Order Allow,Deny
+ Deny from all
+</FilesMatch>
+
+# secure directory by disabling script execution
+AddHandler cgi-script .pl .py .jsp .asp .htm .shtml .sh .cgi
+Options -ExecCGI
+
+Options All -Indexes
+# prevent folder listing
+
+IndexIgnore *
+
+# ensure CHMOD settings for specified file types
+# remember to never set CHMOD 777 unless you know what you are doing
+# files requiring write access should use CHMOD 766 rather than 777
+# keep specific file types private by setting their CHMOD to 400
+#chmod .htpasswd files 640
+#chmod .htaccess files 644
+#chmod php files 600
+
+
+RewriteCond %{THE_REQUEST} "^[^ ]* .*?\.php[? ].*$"
+RewriteRule .* - [L,R=500]
+
+ServerSignature Off
+LimitRequestBody 8900000000
+
+# Disable index view
+Options -Indexes
+
+# Hide a specific file
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
+
+
+#AIOWPS_DENY_BAD_QUERY_STRINGS_START
+<IfModule mod_rewrite.c>
+##RewriteEngine On
+##RewriteCond %{QUERY_STRING} ftp:     [NC,OR]
+##RewriteCond %{QUERY_STRING} http:    [NC,OR]
+##RewriteCond %{QUERY_STRING} https:   [NC,OR]
+##RewriteCond %{QUERY_STRING} mosConfig [NC,OR]
+##RewriteCond %{QUERY_STRING} ^.*(globals|encode|localhost|loopback).* [NC,OR]
+
+RewriteCond %{QUERY_STRING} \=\|w\| [NC,OR]
+RewriteCond %{QUERY_STRING} ^(.*)/self/(.*)$ [NC,OR]
+RewriteCond %{QUERY_STRING} ^(.*)cPath=http://(.*)$ [NC,OR]
+RewriteCond %{QUERY_STRING} (\<|%3C).*script.*(\>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} (<|%3C)([^s]*s)+cript.*(>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} (\<|%3C).*iframe.*(\>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} (<|%3C)([^i]*i)+frame.*(>|%3E) [NC,OR]
+RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [NC,OR]
+RewriteCond %{QUERY_STRING} base64_(en|de)code[^(]*\([^)]*\) [NC,OR]
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2}) [OR]
+RewriteCond %{QUERY_STRING} ^.*(\[|\]|\(|\)|<|>).* [NC,OR]
+RewriteCond %{QUERY_STRING} (NULL|OUTFILE|LOAD_FILE) [OR]
+RewriteCond %{QUERY_STRING} (\./|\../|\.../)+(motd|etc|bin) [NC,OR]
+RewriteCond %{QUERY_STRING} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
+RewriteCond %{QUERY_STRING} concat[^\(]*\( [NC,OR]
+RewriteCond %{QUERY_STRING} union([^s]*s)+elect [NC,OR]
+RewriteCond %{QUERY_STRING} union([^a]*a)+ll([^s]*s)+elect [NC,OR]
+RewriteCond %{QUERY_STRING} (;|<|>|'|"|\)|%0A|%0D|%22|%27|%3C|%3E|%00).*(/\*|union|select|insert|drop|delete|update|cast|create|char|convert|alter|declare|order|script|set|md5|benchmark|encode) [NC,OR]
+##RewriteRule ^(.*)$ - [F,L]
+</IfModule>
+#AIOWPS_DENY_BAD_QUERY_STRINGS_END
+
+#AIOWPS_ADVANCED_CHAR_STRING_FILTER_START
+<IfModule mod_alias.c>
+RedirectMatch 403 \,
+RedirectMatch 403 \:
+RedirectMatch 403 \;
+RedirectMatch 403 \=
+RedirectMatch 403 \[
+RedirectMatch 403 \]
+RedirectMatch 403 \^
+RedirectMatch 403 \`
+RedirectMatch 403 \{
+RedirectMatch 403 \}
+RedirectMatch 403 \~
+RedirectMatch 403 \"
+RedirectMatch 403 \$
+RedirectMatch 403 \<
+RedirectMatch 403 \>
+RedirectMatch 403 \|
+RedirectMatch 403 \.\.
+RedirectMatch 403 \%0
+RedirectMatch 403 \%A
+RedirectMatch 403 \%B
+RedirectMatch 403 \%C
+RedirectMatch 403 \%D
+RedirectMatch 403 \%E
+RedirectMatch 403 \%F
+RedirectMatch 403 \%22
+RedirectMatch 403 \%27
+RedirectMatch 403 \%28
+RedirectMatch 403 \%29
+RedirectMatch 403 \%3C
+RedirectMatch 403 \%3E
+RedirectMatch 403 \%3F
+RedirectMatch 403 \%5B
+RedirectMatch 403 \%5C
+RedirectMatch 403 \%5D
+RedirectMatch 403 \%7B
+RedirectMatch 403 \%7C
+RedirectMatch 403 \%7D
+# COMMON PATTERNS
+Redirectmatch 403 \_vpi
+RedirectMatch 403 \.inc
+Redirectmatch 403 xAou6
+Redirectmatch 403 db\_name
+Redirectmatch 403 select\(
+Redirectmatch 403 convert\(
+Redirectmatch 403 \/query\/
+RedirectMatch 403 ImpEvData
+Redirectmatch 403 \.XMLHTTP
+Redirectmatch 403 proxydeny
+RedirectMatch 403 function\.
+Redirectmatch 403 remoteFile
+Redirectmatch 403 servername
+Redirectmatch 403 \&rptmode\=
+Redirectmatch 403 sys\_cpanel
+RedirectMatch 403 db\_connect
+RedirectMatch 403 doeditconfig
+RedirectMatch 403 check\_proxy
+Redirectmatch 403 system\_user
+Redirectmatch 403 \/\(null\)\/
+Redirectmatch 403 clientrequest
+Redirectmatch 403 option\_value
+RedirectMatch 403 ref\.outcontrol
+# SPECIFIC EXPLOITS
+RedirectMatch 403 errors\.
+RedirectMatch 403 config\.
+RedirectMatch 403 include\.
+RedirectMatch 403 display\.
+RedirectMatch 403 register\.
+Redirectmatch 403 password\.
+RedirectMatch 403 maincore\.
+RedirectMatch 403 authorize\.
+Redirectmatch 403 macromates\.
+RedirectMatch 403 head\_auth\.
+RedirectMatch 403 submit\_links\.
+RedirectMatch 403 change\_action\.
+Redirectmatch 403 com\_facileforms\/
+RedirectMatch 403 admin\_db\_utilities\.
+RedirectMatch 403 admin\.webring\.docs\.
+Redirectmatch 403 Table\/Latest\/index\.
+</IfModule>
+#AIOWPS_ADVANCED_CHAR_STRING_FILTER_END
+
+# Extra Security Headers
+<IfModule mod_headers.c>
+   Header set X-XSS-Protection "1; mode=block"
+   Header set X-Content-Type-Options nosniff
+</IfModule>
+
+# Block timthumb hack
+RewriteCond %{REQUEST_URI} (timthumb\.php|phpthumb\.php|thumb\.php|thumbs\.php) [NC]
+RewriteRule . - [S=1]
+
+# Block suspicious user agents and requests
+RewriteCond %{HTTP_USER_AGENT} (libwww-perl|wget|python|nikto|curl|scan|java|winhttp|clshttp|loader) [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} (<|>|'|%0A|%0D|%27|%3C|%3E|%00) [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} (;|<|>|'|"|\)|\(|%0A|%0D|%22|%27|%28|%3C|%3E|%00).*(libwww-perl|wget|python|nikto|curl|scan|java|winhttp|HTTrack|clshttp|archiver|loader|email|harvest|extract|grab|miner) [NC,OR]
+RewriteCond %{THE_REQUEST} \?\ HTTP/ [NC,OR]
+RewriteCond %{THE_REQUEST} \/\*\ HTTP/ [NC,OR]
+RewriteCond %{THE_REQUEST} etc/passwd [NC,OR]
+RewriteCond %{THE_REQUEST} cgi-bin [NC,OR]
+RewriteCond %{THE_REQUEST} (%0A|%0D) [NC,OR]
+
+# Block MySQL injections, RFI, base64, etc.
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=http:// [OR]
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=http%3A%2F%2F [OR]
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=(\.\.//?)+ [OR]
+RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=/([a-z0-9_.]//?)+ [NC,OR]
+RewriteCond %{QUERY_STRING} \=PHP[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12} [NC,OR]
+RewriteCond %{QUERY_STRING} (\.\./|\.\.) [OR]
+
+# PHP-CGI Vulnerability
+RewriteCond %{QUERY_STRING} ^(%2d|\-)[^=]+$ [NC,OR]
+
+#proc/self/environ? no way!
+RewriteCond %{QUERY_STRING} proc\/self\/environ [NC,OR]
+
+RewriteCond %{QUERY_STRING} (sp_executesql) [NC]
+RewriteRule ^(.*)$ - [F,L]
+
+# Prevent use of specified methods in HTTP Request 
+RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK) [NC,OR] 
+# Block out use of illegal or unsafe characters in the HTTP Request 
+RewriteCond %{THE_REQUEST} ^.*(\\r|\\n|%0A|%0D).* [NC,OR] 
+# Block out use of illegal or unsafe characters in the Referer Variable of the HTTP Request 
+RewriteCond %{HTTP_REFERER} ^(.*)(<|>|'|%0A|%0D|%27|%3C|%3E|%00).* [NC,OR] 
+# Block out use of illegal or unsafe characters in any cookie associated with the HTTP Request 
+RewriteCond %{HTTP_COOKIE} ^.*(<|>|'|%0A|%0D|%27|%3C|%3E|%00).* [NC,OR] 
+# Block out use of illegal characters in URI or use of malformed URI 
+RewriteCond %{REQUEST_URI} ^/(,|;|:|<|>|">|"<|/|\\\.\.\\).{0,9999}.* [NC,OR] 
+# Block out  use of empty User Agent Strings
+# NOTE - disable this rule if your site is integrated with Payment Gateways such as PayPal 
+RewriteCond %{HTTP_USER_AGENT} ^$ [OR] 
+# Block out  use of illegal or unsafe characters in the User Agent variable 
+RewriteCond %{HTTP_USER_AGENT} ^.*(<|>|'|%0A|%0D|%27|%3C|%3E|%00).* [NC,OR] 
+# Measures to block out  SQL injection attacks 
+RewriteCond %{QUERY_STRING} ^.*(;|<|>|'|"|\)|%0A|%0D|%22|%27|%3C|%3E|%00).*(/\*|union|select|insert|cast|set|declare|drop|update|md5|benchmark).* [NC,OR] 
+# Block out  reference to localhost/loopback/127.0.0.1 in the Query String 
+RewriteCond %{QUERY_STRING} ^.*(localhost|loopback|127\.0\.0\.1).* [NC,OR] 
+# Block out  use of illegal or unsafe characters in the Query String variable 
+RewriteCond %{QUERY_STRING} ^.*(<|>|'|%0A|%0D|%27|%3C|%3E|%00).* [NC]
+
+#END SECURITY SETTINGS
+
+<Limit GET POST HEAD>
+Order Allow,Deny
+Allow from all
+Deny from env=bad_bot
+</Limit>
+
+<IfModule pagespeed_module>
+    ModPagespeed off
+</IfModule>
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php7_module>
+   php_flag display_errors On
+   php_value max_execution_time 90000
+   php_value max_input_time 9000
+   php_value max_input_vars 90000
+   php_value memory_limit 90480M
+   php_value post_max_size 90480M
+   php_value session.gc_maxlifetime 94400
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php74"
+   php_value upload_max_filesize 90480M
+   php_flag zlib.output_compression On
+</IfModule>
+<IfModule lsapi_module>
+   php_flag display_errors On
+   php_value max_execution_time 90000
+   php_value max_input_time 9000
+   php_value max_input_vars 90000
+   php_value memory_limit 90480M
+   php_value post_max_size 90480M
+   php_value session.gc_maxlifetime 94400
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php74"
+   php_value upload_max_filesize 90480M
+   php_flag zlib.output_compression On
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php74” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php74 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
